@@ -27,25 +27,26 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Cairo', sans-serif; background: var(--gray-light); color: var(--primary); direction: rtl; overflow-x: hidden; }
 
-        /* ===== TOPBAR ===== */
+        /* ===== TOPBAR — مستمر بلا انقطاع ===== */
         .topbar {
             background: var(--primary); color: #fff;
             overflow: hidden; white-space: nowrap;
-            padding: 7px 0;
-            font-size: 12px;
+            padding: 7px 0; font-size: 12px;
+            direction: ltr;
         }
-        .topbar .marquee {
-            display: inline-block;
-            animation: scroll-right 20s linear infinite;
-            padding-right: 100%;
+        .topbar-track {
+            display: inline-flex; width: max-content;
+            animation: ticker-ltr 18s linear infinite;
+            will-change: transform;
         }
-        @keyframes scroll-right {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        .topbar-item { padding: 0 40px; display: inline-block; flex-shrink: 0; }
+        @keyframes ticker-ltr {
+            0%   { transform: translateX(-50%); }
+            100% { transform: translateX(0%); }
         }
         .topbar b { color: var(--orange); }
 
-        /* ===== NAV ===== */
+        /* ===== NAV — ترتيب معكوس: صورة+اسم | بحث | سلة | حساب ===== */
         nav {
             background: #fff;
             box-shadow: 0 1px 0 var(--border), 0 4px 20px rgba(13,27,42,.06);
@@ -56,6 +57,8 @@
             max-width: 1280px; margin: 0 auto;
             display: flex; align-items: center; gap: 12px;
             padding: 0 20px; height: 100%;
+            /* LTR direction so logo sits on the LEFT */
+            direction: ltr;
         }
         .logo-wrap { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
         .logo-icon {
@@ -63,9 +66,7 @@
             border-radius: 12px; display: flex; align-items: center; justify-content: center;
             position: relative; overflow: hidden;
         }
-        .logo-icon img {
-            width: 100%; height: 100%; object-fit: cover;
-        }
+        .logo-icon img { width: 100%; height: 100%; object-fit: cover; }
         .logo-p { font-size: 26px; font-weight: 900; color: #fff; line-height: 1; position: relative; z-index: 2; }
         .logo-drop {
             position: absolute; bottom: 3px; right: 4px;
@@ -76,24 +77,29 @@
         .logo-name { font-size: 20px; font-weight: 900; color: var(--primary); letter-spacing: -1px; line-height: 1.1; }
         .logo-name span { color: var(--orange); }
         .logo-sub { font-size: 8.5px; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; }
+
+        /* Search in middle */
         .search-wrap {
             flex: 1; max-width: 480px; margin: 0 auto;
             position: relative;
         }
         .search-wrap input {
-            width: 100%; padding: 10px 42px 10px 14px;
+            width: 100%; padding: 10px 14px 10px 42px;
             border: 2px solid var(--border); border-radius: 50px;
             font-family: 'Cairo', sans-serif; font-size: 14px;
             outline: none; transition: .2s; background: #f8fafc;
+            direction: rtl;
         }
         .search-wrap input:focus { border-color: var(--orange); background: #fff; }
         .search-btn {
-            position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+            position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
             background: none; border: none; cursor: pointer; color: var(--gray);
             display: flex; align-items: center; transition: .2s;
         }
         .search-btn:hover { color: var(--orange); }
-        .nav-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+        /* Nav actions: cart then account — on the RIGHT */
+        .nav-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; margin-left: auto; }
         .icon-btn {
             position: relative; width: 42px; height: 42px; border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
@@ -102,7 +108,7 @@
         }
         .icon-btn:hover { background: var(--gray-light); color: var(--orange); }
         .badge {
-            position: absolute; top: 4px; left: 4px;
+            position: absolute; top: 4px; right: 4px;
             background: var(--orange); color: #fff;
             border-radius: 50%; width: 17px; height: 17px;
             font-size: 10px; display: flex; align-items: center; justify-content: center;
@@ -141,39 +147,79 @@
         .page { display: none; }
         .page.active { display: block; }
 
-        /* ===== HERO ===== */
-        .hero-section { max-width: 1280px; margin: 20px auto 0; padding: 0 16px; }
+        /* ===== HERO SLIDER ===== */
+        .hero-section { max-width: 1280px; margin: 16px auto 0; padding: 0 16px; }
+        .hero-slider {
+            position: relative; border-radius: var(--radius);
+            overflow: hidden;
+            height: 240px;
+        }
+        .hero-slides {
+            display: flex; height: 100%;
+            flex-direction: row-reverse;
+            transition: transform .6s cubic-bezier(.4,0,.2,1);
+            will-change: transform;
+        }
         .hero-card {
-            background: var(--primary); border-radius: var(--radius);
-            padding: 36px 40px; display: flex; align-items: center;
-            justify-content: space-between; min-height: 190px;
-            position: relative; overflow: hidden;
+            width: 100%; min-width: 100%; height: 240px;
+            padding: 28px 28px 44px 28px;
+            display: flex; align-items: center;
+            position: relative; flex-shrink: 0;
+            box-sizing: border-box;
         }
-        .hero-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 75% 50%, rgba(243,108,33,.18) 0%, transparent 60%);
+        /* خلفيات صور للبنرات */
+        .hero-card.slide-1 {
+            background: linear-gradient(105deg, rgba(13,27,42,.95) 55%, rgba(243,108,33,.55)),
+                        url('https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=1200&q=80') center/cover no-repeat;
         }
-        .hero-content { position: relative; z-index: 1; max-width: 480px; }
+        .hero-card.slide-2 {
+            background: linear-gradient(105deg, rgba(150,45,0,.93) 50%, rgba(13,27,42,.6)),
+                        url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80') center/cover no-repeat;
+        }
+        .hero-card.slide-3 {
+            background: linear-gradient(105deg, rgba(10,20,50,.93) 50%, rgba(90,30,160,.55)),
+                        url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80') center/cover no-repeat;
+        }
+        .hero-card.slide-4 {
+            background: linear-gradient(105deg, rgba(0,80,40,.93) 50%, rgba(13,27,42,.6)),
+                        url('https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1200&q=80') center/cover no-repeat;
+        }
+
+        /* نقاط التنقل */
+        .hero-dots {
+            position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 7px; z-index: 15; pointer-events: all;
+        }
+        .hero-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: rgba(255,255,255,.45); cursor: pointer;
+            transition: .3s; border: none; outline: none;
+            padding: 0;
+        }
+        .hero-dot.active { background: var(--orange); width: 22px; border-radius: 4px; }
+
+        /* محتوى البنر */
+        .hero-content { position: relative; z-index: 2; max-width: 320px; }
         .hero-pill {
             display: inline-flex; align-items: center; gap: 6px;
-            background: rgba(243,108,33,.2); color: var(--orange);
-            padding: 5px 14px; border-radius: 50px; font-size: 12px; font-weight: 700;
-            margin-bottom: 14px; border: 1px solid rgba(243,108,33,.3);
+            background: rgba(243,108,33,.22); color: var(--orange);
+            padding: 4px 12px; border-radius: 50px; font-size: 11px; font-weight: 700;
+            margin-bottom: 10px; border: 1px solid rgba(243,108,33,.35);
         }
-        .hero-h1 { font-size: 30px; font-weight: 900; color: #fff; line-height: 1.25; margin-bottom: 8px; }
+        .hero-h1 { font-size: 26px; font-weight: 900; color: #fff; line-height: 1.25; margin-bottom: 8px; }
         .hero-h1 span { color: var(--orange); }
-        .hero-p { color: rgba(255,255,255,.6); font-size: 14px; margin-bottom: 20px; line-height: 1.6; }
+        .hero-p { color: rgba(255,255,255,.8); font-size: 13px; margin-bottom: 16px; line-height: 1.55; }
         .btn-hero {
-            background: var(--orange); color: #fff; padding: 12px 26px;
-            border-radius: 50px; font-family: 'Cairo', sans-serif; font-size: 14px;
+            background: var(--orange); color: #fff; padding: 10px 22px;
+            border-radius: 50px; font-family: 'Cairo', sans-serif; font-size: 13px;
             font-weight: 700; border: none; cursor: pointer; transition: .25s;
-            display: inline-flex; align-items: center; gap: 6px;
+            display: inline-flex; align-items: center; gap: 6px; position: relative; z-index: 2;
         }
-        .btn-hero:hover { background: var(--orange-light); transform: translateY(-2px); }
+        .btn-hero:hover { background: var(--orange-light); transform: translateY(-1px); }
         .hero-art {
-            font-size: 88px; opacity: .08;
-            position: absolute; left: 32px; top: 50%; transform: translateY(-50%);
-            user-select: none;
+            font-size: 80px; opacity: .13; position: absolute;
+            left: 70px; top: 50%; transform: translateY(-50%);
+            user-select: none; z-index: 1; pointer-events: none;
         }
 
         /* ===== SECTION ===== */
@@ -200,20 +246,39 @@
         }
         .cat-card {
             background: #fff; border-radius: var(--radius);
-            padding: 22px 14px; text-align: center;
+            padding: 20px 14px 16px; text-align: center;
             cursor: pointer; transition: .25s;
             border: 2px solid transparent; box-shadow: var(--shadow);
         }
         .cat-card:hover { border-color: var(--orange); box-shadow: var(--shadow-hover); transform: translateY(-3px); }
         .cat-card:active { transform: translateY(0); }
         .cat-icon-wrap {
-            width: 56px; height: 56px; border-radius: 16px;
+            width: 52px; height: 52px; border-radius: 16px;
             background: var(--orange-pale); margin: 0 auto 10px;
             display: flex; align-items: center; justify-content: center;
             color: var(--orange);
         }
-        .cat-label { font-size: 13px; font-weight: 700; }
-        .cat-sub-label { font-size: 10px; color: var(--gray); margin-top: 3px; }
+        .cat-label { font-size: 13px; font-weight: 700; line-height: 1.3; }
+
+        /* ===== زر الدعم العائم ===== */
+        .fab-support {
+            position: fixed; bottom: 80px; left: 16px; z-index: 200;
+            background: #25D366; color: #fff;
+            width: 54px; height: 54px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 18px rgba(37,211,102,.5);
+            text-decoration: none; transition: transform .2s, box-shadow .2s;
+            animation: pulse-wa 2.8s ease-in-out infinite;
+        }
+        .fab-support .fab-label { display: none; }
+        .fab-support:hover { transform: scale(1.12); box-shadow: 0 6px 28px rgba(37,211,102,.65); animation: none; }
+        @keyframes pulse-wa {
+            0%,100% { box-shadow: 0 4px 18px rgba(37,211,102,.5); }
+            50%      { box-shadow: 0 4px 28px rgba(37,211,102,.8), 0 0 0 8px rgba(37,211,102,.12); }
+        }
+        @media(min-width: 769px) {
+            .fab-support { bottom: 24px; }
+        }
 
         /* ===== PRODUCT GRID ===== */
         .prod-grid {
@@ -333,6 +398,34 @@
         .account-menu a:hover,.account-menu button:hover { background: var(--gray-light); }
         .account-menu .icon-col { color: var(--orange); display: flex; margin-left: auto; }
         .logout-btn { color: var(--danger,#ef4444)!important; }
+
+        /* About Us card in account */
+        .about-card {
+            background: #fff; border-radius: var(--radius); box-shadow: var(--shadow);
+            padding: 20px; margin-bottom: 16px;
+        }
+        .about-card h3 {
+            font-size: 15px; font-weight: 900; margin-bottom: 10px;
+            display: flex; align-items: center; gap: 8px; color: var(--primary);
+        }
+        .about-card p { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 14px; }
+        .social-row {
+            display: flex; gap: 10px; flex-wrap: wrap;
+        }
+        .social-btn {
+            display: flex; align-items: center; gap: 6px;
+            padding: 9px 14px; border-radius: 50px;
+            font-family: 'Cairo', sans-serif; font-size: 12px; font-weight: 700;
+            text-decoration: none; transition: .2s; border: none; cursor: pointer;
+        }
+        .social-btn.wa  { background: #e8f9ef; color: #128c7e; }
+        .social-btn.wa:hover  { background: #25D366; color: #fff; }
+        .social-btn.fb  { background: #e8eeff; color: #1877f2; }
+        .social-btn.fb:hover  { background: #1877f2; color: #fff; }
+        .social-btn.ig  { background: #fce8f3; color: #c13584; }
+        .social-btn.ig:hover  { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff; }
+        .social-btn.tk  { background: #e8f7fb; color: #000; }
+        .social-btn.tk:hover  { background: #000; color: #fff; }
 
         /* ===== ORDERS LIST ===== */
         .orders-list { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
@@ -555,13 +648,25 @@
             .logo-sub { display: none; }
             .logo-name { font-size: 17px; }
             .nav-inner { gap: 8px; padding: 0 12px; }
-            .hero-section { padding: 0 12px; }
-            .hero-card { padding: 22px 18px; min-height: 160px; }
-            .hero-h1 { font-size: 22px; }
+            /* إخفاء نص زر الحساب في الموبايل — أيقونة فقط */
+            .btn-login span.login-text { display: none; }
+            .btn-login { padding: 9px 11px; border-radius: 12px; }
+            /* إخفاء badge الأرقام في الهيدر على الموبايل */
+            .nav-actions .badge { display: none !important; }
+            /* hero */
+            .hero-section { padding: 0 12px; margin: 12px auto 0; }
+            .hero-slider { border-radius: var(--radius); height: 195px; }
+            .hero-card { height: 195px; padding: 16px 16px 36px 16px; }
+            .hero-h1 { font-size: 19px; }
             .hero-p { display: none; }
             .hero-art { display: none; }
+            .hero-pill { font-size: 10px; padding: 3px 10px; margin-bottom: 7px; }
+            .btn-hero { font-size: 12px; padding: 7px 14px; }
+            /* sections */
             .section { padding: 0 12px; }
-            .cat-grid { grid-template-columns: repeat(3,1fr); gap: 10px; }
+            .cat-grid { grid-template-columns: repeat(3,1fr); gap: 8px; }
+            .cat-card { padding: 12px 8px 10px; }
+            .cat-icon-wrap { width: 44px; height: 44px; border-radius: 12px; }
             .prod-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
             .promo-grid { grid-template-columns: 1fr; }
             .search-wrap { display: none; }
@@ -570,7 +675,11 @@
         @media(max-width: 380px) {
             .cat-grid { grid-template-columns: repeat(3,1fr); }
             .prod-grid { grid-template-columns: repeat(2,1fr); }
-            .hero-h1 { font-size: 19px; }
+            .hero-h1 { font-size: 16px; }
+            .hero-card { padding: 14px 12px 32px 58px; }
+            .cat-card { padding: 10px 6px 8px; }
+            .cat-icon-wrap { width: 38px; height: 38px; }
+            .cat-label { font-size: 11px; }
         }
     </style>
 </head>
@@ -602,6 +711,33 @@ let currentProduct=null;
 let currentPage='home';
 let unsubscribeOrders=null;
 let productsSearchQuery='';
+
+// ===== HERO SLIDER =====
+let heroSlide=0;
+const heroTotal=4;
+let heroTimer=null;
+
+function goSlide(n){
+  heroSlide=((n%heroTotal)+heroTotal)%heroTotal;
+  const el=document.querySelector('.hero-slides');
+  if(el) el.style.transform=`translateX(${heroSlide * 100}%)`;
+  document.querySelectorAll('.hero-dot').forEach((d,i)=>{
+    d.classList.toggle('active', i===heroSlide);
+  });
+}
+window.goSlide=goSlide;
+window.heroSlideVal=()=>heroSlide;
+
+function startHeroTimer(){
+  if(heroTimer) clearInterval(heroTimer);
+  heroTimer=setInterval(()=>goSlide(heroSlide+1), 5000);
+}
+function manualSlide(n){
+  goSlide(n);
+  startHeroTimer(); // reset timer on manual navigation
+}
+window.manualSlide=manualSlide;
+startHeroTimer();
 
 // ===== LOAD PRODUCTS =====
 async function loadProducts(){
@@ -670,18 +806,17 @@ window.showPage = function(page){
 // ===== HOME =====
 function renderHome(){
   const cats=[
-    {label:'الطباعة والدعاية',sub:'فلايرات • أعلام',icon:'printer',cat:'الطباعة والدعاية والإعلان'},
-    {label:'الهدايا والتكريم',sub:'دروع • مجات',icon:'gift',cat:'الهدايا الدعائية والتكريم'},
-    {label:'المكاتب والشركات',sub:'اختام • أطقم',icon:'briefcase',cat:'مستلزمات المكاتب والشركات'},
-    {label:'الملابس',sub:'يونيفورم • شخصي',icon:'shirt',cat:'الملابس والمنتجات الشخصية'},
-    {label:'التغليف',sub:'بوكسات • تعبئة',icon:'package',cat:'التغليف والعرض'},
-    {label:'الخامات',sub:'سبلميشن • شيتات',icon:'layers',cat:'خامات الطباعة'},
+    {label:'الطباعة والدعاية',icon:'printer',cat:'الطباعة والدعاية والإعلان'},
+    {label:'الهدايا والتكريم',icon:'gift',cat:'الهدايا الدعائية والتكريم'},
+    {label:'المكاتب والشركات',icon:'briefcase',cat:'مستلزمات المكاتب والشركات'},
+    {label:'الملابس',icon:'shirt',cat:'الملابس والمنتجات الشخصية'},
+    {label:'التغليف',icon:'package',cat:'التغليف والعرض'},
+    {label:'الخامات',icon:'layers',cat:'خامات الطباعة'},
   ];
   document.getElementById('homeCatGrid').innerHTML=cats.map(c=>`
     <div class="cat-card" onclick="filterAndGo('${c.cat}')">
-      <div class="cat-icon-wrap"><i data-lucide="${c.icon}" style="width:26px;height:26px"></i></div>
+      <div class="cat-icon-wrap"><i data-lucide="${c.icon}" style="width:24px;height:24px"></i></div>
       <div class="cat-label">${c.label}</div>
-      <div class="cat-sub-label">${c.sub}</div>
     </div>`).join('');
   renderProdGrid(allProducts.slice(0,8),'homeProdGrid');
   lucide.createIcons();
@@ -953,6 +1088,33 @@ function renderAccountPage(){
           <span class="icon-col"><i data-lucide="chevron-left" style="width:16px;height:16px"></i></span>
         </button>
       </div>
+    </div>
+
+    <!-- معلومات عنا + سوشال ميديا -->
+    <div class="about-card">
+      <h3>
+        <i data-lucide="info" style="width:18px;height:18px;color:var(--orange)"></i>
+        معلومات عنا
+      </h3>
+      <p>برينتوفا — متجر الطباعة والدعاية الأول. نوفر أعلى جودة طباعة بأسرع تسليم. مجات، فلايرات، دروع، يونيفورم، وأكثر. نخدم الأفراد والشركات بأفضل الأسعار.</p>
+      <div class="social-row">
+        <a class="social-btn wa" href="https://wa.me/201282853079" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          واتساب
+        </a>
+        <a class="social-btn fb" href="https://facebook.com" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          فيسبوك
+        </a>
+        <a class="social-btn ig" href="https://instagram.com" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          إنستغرام
+        </a>
+        <a class="social-btn tk" href="https://tiktok.com" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.72a8.18 8.18 0 004.78 1.52V6.79a4.85 4.85 0 01-1.01-.1z"/></svg>
+          تيك توك
+        </a>
+      </div>
     </div>`;
   lucide.createIcons();
 }
@@ -978,7 +1140,7 @@ async function renderOrdersPage(){
     }
     const statusMap={pending:'معلق',processing:'جاري التنفيذ',done:'مكتمل',cancelled:'ملغي'};
     const statusClass={pending:'sb-pending',processing:'sb-processing',done:'sb-done',cancelled:'sb-cancelled'};
-    const storePhone="01282853079";
+    const storePhone="201282853079";
     el.innerHTML=`<div class="orders-list">${userOrders.map(order=>{
       const orderIdShort=order.id.slice(-6).toUpperCase();
       const orderStatus=order.status||'pending';
@@ -994,13 +1156,13 @@ async function renderOrdersPage(){
         <div style="font-size:12px;color:var(--gray);margin-bottom:8px">${createdAt}</div>
         <div style="font-size:13px;color:#555;margin-bottom:10px">${itemsText}</div>
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><span style="font-size:13px;color:var(--gray)">${address}</span><span class="order-total">${total.toFixed(2)} جنيه</span></div>
-        <div style="margin-top:12px;display:flex;gap:8px;"><a href="https://wa.me/${storePhone}?text=${encodeURIComponent(whatsappMsg)}" target="_blank" style="text-decoration:none;" class="btn-sm" style="background:#25D366;color:#fff;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px;"><i data-lucide="message-circle" style="width:14px;height:14px"></i> تواصل واتساب</a></div>
+        <div style="margin-top:12px;display:flex;gap:8px;"><a href="https://wa.me/${storePhone}?text=${encodeURIComponent(whatsappMsg)}" target="_blank" style="text-decoration:none;background:#25D366;color:#fff;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px;font-family:'Cairo',sans-serif;"><i data-lucide="message-circle" style="width:14px;height:14px"></i> تواصل واتساب</a></div>
       </div>`;
     }).join('')}</div>`;
     lucide.createIcons();
   }, (error) => {
     console.error('Orders listener error:',error);
-    el.innerHTML=`<div class="empty"><i data-lucide="alert-triangle" style="width:48px;height:48px;color:var(--danger)"></i><p>تعذّر تحميل الطلبات. تأكد من صلاحية الاتصال.</p><small style="color:var(--gray)">${error.message}</small></div>`;
+    el.innerHTML=`<div class="empty"><i data-lucide="alert-triangle" style="width:48px;height:48px;color:var(--danger)"></i><p>تعذّر تحميل الطلبات.</p><small style="color:var(--gray)">${error.message}</small></div>`;
     lucide.createIcons();
   });
 }
@@ -1031,20 +1193,23 @@ document.addEventListener('DOMContentLoaded',()=>{
   loadProducts();
   updateCartUI();
   showPage('home');
-});
-</script>
+  goSlide(0);
+});</script>
 
-<!-- Topbar -->
+<!-- Topbar — مستمر بلا انقطاع -->
 <div class="topbar">
-  <div class="marquee">
-    🚀 شحن مجاني على الطلبات فوق <b>500 جنيه</b> &nbsp;|&nbsp; اتصل: <b>01282853079</b> &nbsp;|&nbsp;
-    🚀 شحن مجاني على الطلبات فوق <b>500 جنيه</b> &nbsp;|&nbsp; اتصل: <b>01282853079</b>
+  <div class="topbar-track">
+    <span class="topbar-item">🚀 شحن مجاني على الطلبات فوق <b>500 جنيه</b> &nbsp;|&nbsp; 📞 اتصل: <b>01282853079</b> &nbsp;|&nbsp; 🎨 اطبع تصميمك بأعلى جودة &nbsp;|&nbsp; 🏆 متجر الطباعة والدعاية الأول &nbsp;|&nbsp; 💬 تواصل معنا على واتساب</span>
+    <span class="topbar-item">🚀 شحن مجاني على الطلبات فوق <b>500 جنيه</b> &nbsp;|&nbsp; 📞 اتصل: <b>01282853079</b> &nbsp;|&nbsp; 🎨 اطبع تصميمك بأعلى جودة &nbsp;|&nbsp; 🏆 متجر الطباعة والدعاية الأول &nbsp;|&nbsp; 💬 تواصل معنا على واتساب</span>
+    <span class="topbar-item">🚀 شحن مجاني على الطلبات فوق <b>500 جنيه</b> &nbsp;|&nbsp; 📞 اتصل: <b>01282853079</b> &nbsp;|&nbsp; 🎨 اطبع تصميمك بأعلى جودة &nbsp;|&nbsp; 🏆 متجر الطباعة والدعاية الأول &nbsp;|&nbsp; 💬 تواصل معنا على واتساب</span>
+    <span class="topbar-item">🚀 شحن مجاني على الطلبات فوق <b>500 جنيه</b> &nbsp;|&nbsp; 📞 اتصل: <b>01282853079</b> &nbsp;|&nbsp; 🎨 اطبع تصميمك بأعلى جودة &nbsp;|&nbsp; 🏆 متجر الطباعة والدعاية الأول &nbsp;|&nbsp; 💬 تواصل معنا على واتساب</span>
   </div>
 </div>
 
-<!-- Navbar -->
+<!-- Navbar — يسار: صورة + اسم | بحث | سلة | حساب -->
 <nav>
   <div class="nav-inner">
+    <!-- اليسار: اللوجو -->
     <a class="logo-wrap" onclick="showPage('home')" style="cursor:pointer">
       <div class="logo-icon">
         <img src="https://iili.io/Bs7EV4f.png" alt="Printova" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2244%22 height=%2244%22%3E%3Crect width=%2244%22 height=%2244%22 fill=%22%230d1b2a%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2222%22 font-weight=%22bold%22%3EP%3C/text%3E%3C/svg%3E';">
@@ -1054,12 +1219,16 @@ document.addEventListener('DOMContentLoaded',()=>{
         <span class="logo-sub">Print. Your Vision. Our Passion.</span>
       </div>
     </a>
+
+    <!-- البحث في المنتصف -->
     <div class="search-wrap">
       <input type="text" id="searchInput" placeholder="ابحث عن منتج..." onkeyup="if(event.key==='Enter')doSearch()">
       <button class="search-btn" onclick="doSearch()">
         <i data-lucide="search" style="width:18px;height:18px"></i>
       </button>
     </div>
+
+    <!-- اليمين: سلة ثم حساب -->
     <div class="nav-actions">
       <button class="icon-btn mobile-search-btn" onclick="showPage('products')" title="بحث">
         <i data-lucide="search" style="width:22px;height:22px"></i>
@@ -1104,19 +1273,81 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 <!-- HOME PAGE -->
 <div class="page active" id="page-home">
+
+  <!-- Hero Slider — 3 بنرات متحركة بخلفية صور -->
   <div class="hero-section">
-    <div class="hero-card">
-      <div class="hero-content">
-        <div class="hero-pill">
-          <i data-lucide="zap" style="width:12px;height:12px"></i> متجر الطباعة الأول
+    <div class="hero-slider">
+      <div class="hero-slides">
+
+        <!-- بنر 1 -->
+        <div class="hero-card slide-1">
+          <div class="hero-content">
+            <div class="hero-pill">
+              <i data-lucide="zap" style="width:12px;height:12px"></i> متجر الطباعة الأول
+            </div>
+            <h1 class="hero-h1">اطبع <span>بصمتك</span><br>في كل مكان</h1>
+            <p class="hero-p">مجات • فلايرات • دروع • يونيفورم<br>بأعلى جودة وأسرع تسليم</p>
+            <button class="btn-hero" onclick="showPage('products')">
+              تسوّق الآن <i data-lucide="arrow-left" style="width:16px;height:16px"></i>
+            </button>
+          </div>
+          <div class="hero-art">🖨️</div>
         </div>
-        <h1 class="hero-h1">اطبع <span>بصمتك</span><br>في كل مكان</h1>
-        <p class="hero-p">مجات • فلايرات • دروع • يونيفورم<br>بأعلى جودة وأسرع تسليم</p>
-        <button class="btn-hero" onclick="showPage('products')">
-          تسوّق الآن <i data-lucide="arrow-left" style="width:16px;height:16px"></i>
-        </button>
+
+        <!-- بنر 2 -->
+        <div class="hero-card slide-2">
+          <div class="hero-content">
+            <div class="hero-pill">
+              <i data-lucide="tag" style="width:12px;height:12px"></i> عروض الشركات
+            </div>
+            <h1 class="hero-h1">أسعار <span>الجملة</span><br>للشركات</h1>
+            <p class="hero-p">خصومات خاصة للطلبات الكبيرة<br>تواصل معنا الآن</p>
+            <button class="btn-hero" onclick="window.open('https://wa.me/201282853079')">
+              تواصل الآن <i data-lucide="message-circle" style="width:16px;height:16px"></i>
+            </button>
+          </div>
+          <div class="hero-art">🏢</div>
+        </div>
+
+        <!-- بنر 3 -->
+        <div class="hero-card slide-3">
+          <div class="hero-content">
+            <div class="hero-pill">
+              <i data-lucide="gift" style="width:12px;height:12px"></i> هدايا مميزة
+            </div>
+            <h1 class="hero-h1">هدايا <span>دعائية</span><br>لا تُنسى</h1>
+            <p class="hero-p">دروع تكريم • مجات مطبوعة • أطقم شركات<br>اطبع اسمك على كل شيء</p>
+            <button class="btn-hero" onclick="filterAndGo('الهدايا الدعائية والتكريم')">
+              اكتشف الهدايا <i data-lucide="arrow-left" style="width:16px;height:16px"></i>
+            </button>
+          </div>
+          <div class="hero-art">🎁</div>
+        </div>
+
+        <!-- بنر 4 -->
+        <div class="hero-card slide-4">
+          <div class="hero-content">
+            <div class="hero-pill">
+              <i data-lucide="shirt" style="width:12px;height:12px"></i> ملابس مطبوعة
+            </div>
+            <h1 class="hero-h1">يونيفورم <span>وملابس</span><br>بتصميمك</h1>
+            <p class="hero-p">تيشيرتات • بولو • كاب مطبوع<br>للشركات والفرق والأفراد</p>
+            <button class="btn-hero" onclick="filterAndGo('الملابس والمنتجات الشخصية')">
+              تسوّق الملابس <i data-lucide="arrow-left" style="width:16px;height:16px"></i>
+            </button>
+          </div>
+          <div class="hero-art">👕</div>
+        </div>
+
       </div>
-      <div class="hero-art">🖨️</div>
+
+      <!-- نقاط التنقل -->
+      <div class="hero-dots">
+        <button class="hero-dot active" onclick="goSlide(0)"></button>
+        <button class="hero-dot" onclick="goSlide(1)"></button>
+        <button class="hero-dot" onclick="goSlide(2)"></button>
+        <button class="hero-dot" onclick="goSlide(3)"></button>
+      </div>
     </div>
   </div>
 
@@ -1147,13 +1378,13 @@ document.addEventListener('DOMContentLoaded',()=>{
       <div class="promo-card p-dark">
         <h3>طلبات الشركات</h3>
         <p>أسعار خاصة للطلبات الكبيرة والجملة</p>
-        <button class="promo-btn" onclick="window.open('https://wa.me/01282853079')">تواصل معنا</button>
+        <button class="promo-btn" onclick="window.open('https://wa.me/201282853079')">تواصل معنا</button>
         <div class="promo-art"><i data-lucide="building-2" style="width:60px;height:60px"></i></div>
       </div>
       <div class="promo-card p-orange">
         <h3>اطبع تصميمك</h3>
         <p>أرسل تصميمك مع ملاحظات الطلب</p>
-        <button class="promo-btn" onclick="showPage('products')">ابدأ الآن</button>
+        <button class="promo-btn" onclick="window.open('https://wa.me/201282853079?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%2C%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A7%D8%B7%D8%A8%D8%B9%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%D9%8A')">ابدأ الآن</button>
         <div class="promo-art"><i data-lucide="pen-tool" style="width:60px;height:60px"></i></div>
       </div>
     </div>
@@ -1182,7 +1413,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         <div class="footer-col">
           <h4>تواصل معنا</h4>
           <a href="tel:01282853079">📞 01282853079</a>
-          <a href="https://wa.me/01282853079" target="_blank">💬 واتساب</a>
+          <a href="https://wa.me/201282853079" target="_blank">💬 واتساب</a>
         </div>
       </div>
       <div class="footer-bottom">© 2025 Printova — جميع الحقوق محفوظة</div>
@@ -1398,6 +1629,14 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
+
+<!-- زر الدعم العائم - واتساب -->
+<a class="fab-support" href="https://wa.me/201282853079?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%2C%20%D8%A3%D8%AD%D8%AA%D8%A7%D8%AC%20%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%D8%A9" target="_blank" title="الدعم — واتساب">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+    <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+  </svg>
+</a>
 
 </body>
 </html>
