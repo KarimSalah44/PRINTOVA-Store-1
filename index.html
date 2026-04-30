@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>برينتوفا — Print. Your Vision. Our Passion.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+:root{
+  --primary:#0d1b2a;
+  --orange:#f36c21;
+  --orange-light:#ff8c42;
+  --orange-pale:#fff4ee;
+  --white:#fff;
+  --gray:#8a9bb0;
+  --gray-light:#f4f6f9;
+  --border:#e8edf3;
+  --shadow:0 2px 16px rgba(13,27,42,.07);
+  --shadow-hover:0 8px 32px rgba(243,108,33,.15);
+  --radius:18px;
+  --radius-sm:12px;
+  --nav-h:64px;
+  --bot-h:64px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:'Cairo',sans-serif;background:var(--gray-light);color:var(--primary);direction:rtl;overflow-x:hidden;}
+
+/* ===== TOPBAR ===== */
+.topbar{
+  background:var(--primary);color:#fff;
+  text-align:center;font-size:12px;padding:7px 12px;
+  letter-spacing:.3px;line-height:1.4;
+}
+.topbar b{color:var(--orange);}
+
+/* ===== NAV ===== */
+nav{
+  background:#fff;
+  box-shadow:0 1px 0 var(--border),0 4px 20px rgba(13,27,42,.06);
+  position:sticky;top:0;z-index:90;
+  height:var(--nav-h);
+}
+.nav-inner{
+  max-width:1280px;margin:0 auto;
+  display:flex;align-items:center;gap:12px;
+  padding:0 20px;height:100%;
+}
+.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+.logo-icon{
+  width:44px;height:44px;background:var(--primary);
+  border-radius:12px;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:visible;
+}
+.logo-p{font-size:26px;font-weight:900;color:#fff;line-height:1;position:relative;z-index:2;}
+.logo-drop{
+  position:absolute;bottom:3px;right:4px;
+  width:11px;height:13px;background:var(--orange);
+  border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+}
+.logo-texts{display:flex;flex-direction:column;gap:0;}
+.logo-name{font-size:20px;font-weight:900;color:var(--primary);letter-spacing:-1px;line-height:1.1;}
+.logo-name span{color:var(--orange);}
+.logo-sub{font-size:8.5px;color:var(--gray);letter-spacing:2px;text-transform:uppercase;}
+.search-wrap{
+  flex:1;max-width:480px;margin:0 auto;
+  position:relative;
+}
+.search-wrap input{
+  width:100%;padding:10px 42px 10px 14px;
+  border:2px solid var(--border);border-radius:50px;
+  font-family:'Cairo',sans-serif;font-size:14px;
+  outline:none;transition:.2s;background:#f8fafc;
+}
+.search-wrap input:focus{border-color:var(--orange);background:#fff;}
+.search-btn{
+  position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;color:var(--gray);
+  display:flex;align-items:center;transition:.2s;
+}
+.search-btn:hover{color:var(--orange);}
+.nav-actions{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.icon-btn{
+  position:relative;width:42px;height:42px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  background:none;border:none;cursor:pointer;color:var(--primary);
+  transition:.2s;text-decoration:none;
+}
+.icon-btn:hover{background:var(--gray-light);color:var(--orange);}
+.badge{
+  position:absolute;top:4px;left:4px;
+  background:var(--orange);color:#fff;
+  border-radius:50%;width:17px;height:17px;
+  font-size:10px;display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-family:'Cairo',sans-serif;
+}
+.btn-login{
+  background:var(--orange);color:#fff;
+  padding:9px 18px;border-radius:50px;
+  font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;
+  border:none;cursor:pointer;transition:.2s;
+  display:flex;align-items:center;gap:6px;white-space:nowrap;
+}
+.btn-login:hover{background:var(--orange-light);}
+
+/* ===== CATS BAR ===== */
+.cats-bar{
+  background:#fff;border-top:1px solid var(--border);
+  overflow-x:auto;scrollbar-width:none;position:sticky;top:var(--nav-h);z-index:89;
+  box-shadow:0 2px 8px rgba(13,27,42,.04);
+}
+.cats-bar::-webkit-scrollbar{display:none;}
+.cats-inner{
+  max-width:1280px;margin:0 auto;
+  display:flex;padding:0 16px;white-space:nowrap;
+}
+.cat-pill{
+  padding:10px 16px;font-size:13px;font-weight:600;
+  color:var(--gray);border-bottom:3px solid transparent;
+  cursor:pointer;transition:.2s;flex-shrink:0;border:none;
+  background:none;font-family:'Cairo',sans-serif;display:flex;align-items:center;gap:6px;
+}
+.cat-pill:hover,.cat-pill.active{color:var(--orange);border-bottom-color:var(--orange);}
+
+/* ===== PAGES ===== */
+.page{display:none;}
+.page.active{display:block;}
+
+/* ===== HERO ===== */
+.hero-section{max-width:1280px;margin:20px auto 0;padding:0 16px;}
+.hero-card{
+  background:var(--primary);border-radius:var(--radius);
+  padding:36px 40px;display:flex;align-items:center;
+  justify-content:space-between;min-height:190px;
+  position:relative;overflow:hidden;
+}
+.hero-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(circle at 75% 50%,rgba(243,108,33,.18) 0%,transparent 60%);
+}
+.hero-content{position:relative;z-index:1;max-width:480px;}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(243,108,33,.2);color:var(--orange);
+  padding:5px 14px;border-radius:50px;font-size:12px;font-weight:700;
+  margin-bottom:14px;border:1px solid rgba(243,108,33,.3);
+}
+.hero-h1{font-size:30px;font-weight:900;color:#fff;line-height:1.25;margin-bottom:8px;}
+.hero-h1 span{color:var(--orange);}
+.hero-p{color:rgba(255,255,255,.6);font-size:14px;margin-bottom:20px;line-height:1.6;}
+.btn-hero{
+  background:var(--orange);color:#fff;padding:12px 26px;
+  border-radius:50px;font-family:'Cairo',sans-serif;font-size:14px;
+  font-weight:700;border:none;cursor:pointer;transition:.25s;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.btn-hero:hover{background:var(--orange-light);transform:translateY(-2px);}
+.hero-art{
+  font-size:88px;opacity:.08;
+  position:absolute;left:32px;top:50%;transform:translateY(-50%);
+  user-select:none;
+}
+
+/* ===== SECTION ===== */
+.section{max-width:1280px;margin:28px auto 0;padding:0 16px;}
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.sec-title{
+  font-size:18px;font-weight:900;
+  display:flex;align-items:center;gap:10px;
+}
+.sec-title::before{content:'';width:4px;height:20px;background:var(--orange);border-radius:2px;}
+.see-all{
+  color:var(--orange);font-size:13px;font-weight:700;
+  cursor:pointer;background:none;border:none;
+  font-family:'Cairo',sans-serif;display:flex;align-items:center;gap:4px;
+  padding:6px 12px;border-radius:8px;transition:.2s;
+}
+.see-all:hover{background:var(--orange-pale);}
+
+/* ===== CAT CARDS ===== */
+.cat-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:12px;
+}
+.cat-card{
+  background:#fff;border-radius:var(--radius);
+  padding:22px 14px;text-align:center;
+  cursor:pointer;transition:.25s;
+  border:2px solid transparent;box-shadow:var(--shadow);
+}
+.cat-card:hover{border-color:var(--orange);box-shadow:var(--shadow-hover);transform:translateY(-3px);}
+.cat-card:active{transform:translateY(0);}
+.cat-icon-wrap{
+  width:56px;height:56px;border-radius:16px;
+  background:var(--orange-pale);margin:0 auto 10px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--orange);
+}
+.cat-label{font-size:13px;font-weight:700;}
+.cat-sub-label{font-size:10px;color:var(--gray);margin-top:3px;}
+
+/* ===== PRODUCT GRID ===== */
+.prod-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+  gap:14px;
+}
+.prod-card{
+  background:#fff;border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow);
+  transition:.25s;cursor:pointer;
+}
+.prod-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-3px);}
+.prod-card:active{transform:translateY(0);}
+.prod-thumb{
+  width:100%;height:170px;
+  background:linear-gradient(135deg,#f0f4f8,#e4eaf1);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gray);position:relative;overflow:hidden;
+}
+.prod-thumb svg{opacity:.4;}
+.prod-body{padding:14px;}
+.prod-name{font-size:14px;font-weight:700;margin-bottom:3px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.prod-sub{font-size:11px;color:var(--gray);margin-bottom:12px;}
+.prod-footer{display:flex;align-items:center;justify-content:space-between;}
+.prod-price{font-size:17px;font-weight:900;color:var(--orange);}
+.prod-price small{font-size:11px;color:var(--gray);font-weight:400;}
+.btn-add-cart{
+  width:34px;height:34px;border-radius:10px;
+  background:var(--primary);color:#fff;
+  border:none;cursor:pointer;transition:.2s;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.btn-add-cart:hover{background:var(--orange);}
+
+/* ===== PROMO ===== */
+.promo-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.promo-card{
+  border-radius:var(--radius);padding:26px 22px;
+  position:relative;overflow:hidden;cursor:pointer;
+}
+.promo-card.p-dark{background:var(--primary);}
+.promo-card.p-orange{background:var(--orange);}
+.promo-card h3{font-size:18px;font-weight:900;color:#fff;margin-bottom:6px;}
+.promo-card p{font-size:13px;color:rgba(255,255,255,.65);margin-bottom:14px;line-height:1.5;}
+.promo-btn{
+  display:inline-block;background:#fff;
+  padding:8px 18px;border-radius:50px;
+  font-size:13px;font-weight:700;text-decoration:none;
+  transition:.2s;cursor:pointer;border:none;
+  font-family:'Cairo',sans-serif;
+}
+.promo-card.p-dark .promo-btn{color:var(--primary);}
+.promo-card.p-orange .promo-btn{color:var(--orange);}
+.promo-art{
+  position:absolute;left:12px;bottom:8px;
+  opacity:.12;color:#fff;
+}
+
+/* ===== EMPTY STATE ===== */
+.empty{text-align:center;padding:60px 20px;color:var(--gray);}
+.empty svg{margin-bottom:14px;color:var(--border);}
+.empty p{font-size:15px;}
+
+/* ===== PRODUCTS PAGE ===== */
+.products-page-filters{
+  display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;
+  padding:16px 16px 0;max-width:1280px;margin:0 auto;
+}
+.products-page-filters::-webkit-scrollbar{display:none;}
+.filter-chip{
+  padding:7px 16px;border-radius:50px;
+  border:2px solid var(--border);background:#fff;
+  font-family:'Cairo',sans-serif;font-size:13px;font-weight:600;
+  cursor:pointer;transition:.2s;white-space:nowrap;color:var(--gray);
+}
+.filter-chip:hover,.filter-chip.active{
+  border-color:var(--orange);color:var(--orange);background:var(--orange-pale);
+}
+
+/* ===== ACCOUNT PAGE ===== */
+.account-page{max-width:480px;margin:24px auto;padding:0 16px;}
+.account-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px;}
+.account-header{
+  background:var(--primary);padding:28px;
+  display:flex;align-items:center;gap:14px;
+}
+.account-avatar{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--orange);display:flex;align-items:center;justify-content:center;
+  color:#fff;flex-shrink:0;
+}
+.account-name{font-size:16px;font-weight:900;color:#fff;}
+.account-email{font-size:12px;color:rgba(255,255,255,.6);margin-top:2px;}
+.account-menu a,.account-menu button{
+  display:flex;align-items:center;gap:12px;
+  padding:15px 20px;font-size:14px;font-weight:600;
+  color:var(--primary);text-decoration:none;
+  border-bottom:1px solid var(--border);cursor:pointer;
+  background:none;border-right:none;border-left:none;border-top:none;
+  width:100%;text-align:right;font-family:'Cairo',sans-serif;
+  transition:.2s;
+}
+.account-menu a:last-child,.account-menu button:last-child{border-bottom:none;}
+.account-menu a:hover,.account-menu button:hover{background:var(--gray-light);}
+.account-menu .icon-col{color:var(--orange);display:flex;margin-left:auto;}
+.logout-btn{color:var(--danger,#ef4444)!important;}
+
+/* ===== ORDERS LIST ===== */
+.orders-list{padding:16px;display:flex;flex-direction:column;gap:12px;}
+.order-item-card{
+  background:#fff;border-radius:var(--radius-sm);
+  padding:16px;box-shadow:var(--shadow);
+}
+.order-item-card .order-top{display:flex;justify-content:space-between;margin-bottom:8px;}
+.order-item-card .order-id{font-size:13px;font-weight:700;color:var(--gray);}
+.order-item-card .order-date{font-size:12px;color:var(--gray);}
+.order-item-card .order-total{font-size:17px;font-weight:900;color:var(--orange);}
+.status-badge{padding:4px 12px;border-radius:50px;font-size:11px;font-weight:700;display:inline-block;}
+.sb-pending{background:#fff7ed;color:#c2410c;}
+.sb-processing{background:#eff6ff;color:#1d4ed8;}
+.sb-done{background:#f0fdf4;color:#15803d;}
+.sb-cancelled{background:#fef2f2;color:#b91c1c;}
+
+/* ===== AUTH FORMS ===== */
+.auth-wrap{
+  max-width:420px;margin:32px auto;padding:0 16px 80px;
+}
+.auth-card{background:#fff;border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);}
+.auth-logo{text-align:center;margin-bottom:24px;}
+.auth-logo .al-name{font-size:26px;font-weight:900;}
+.auth-logo .al-name span{color:var(--orange);}
+.auth-logo .al-sub{font-size:11px;color:var(--gray);letter-spacing:2px;text-transform:uppercase;}
+.auth-title{font-size:20px;font-weight:900;margin-bottom:6px;}
+.auth-sub{color:var(--gray);font-size:13px;margin-bottom:22px;}
+.form-group{margin-bottom:14px;}
+.form-group label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:var(--primary);}
+.form-group input{
+  width:100%;padding:12px 14px;border:2px solid var(--border);
+  border-radius:var(--radius-sm);font-family:'Cairo',sans-serif;
+  font-size:14px;outline:none;transition:.2s;
+}
+.form-group input:focus{border-color:var(--orange);}
+.btn-full{
+  width:100%;padding:14px;background:var(--orange);color:#fff;
+  border:none;border-radius:var(--radius-sm);
+  font-family:'Cairo',sans-serif;font-size:15px;font-weight:700;
+  cursor:pointer;transition:.2s;margin-top:6px;
+}
+.btn-full:hover{background:var(--orange-light);}
+.auth-switch{text-align:center;margin-top:16px;font-size:13px;color:var(--gray);}
+.auth-switch a{color:var(--orange);font-weight:700;cursor:pointer;}
+.auth-err{
+  background:#fef2f2;color:#b91c1c;
+  padding:10px 14px;border-radius:var(--radius-sm);
+  font-size:13px;margin-bottom:14px;display:none;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  background:var(--primary);color:#fff;
+  padding:44px 20px 28px;margin-top:40px;
+}
+.footer-inner{max-width:1280px;margin:0 auto;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;margin-bottom:28px;}
+.footer-brand .fb-name{font-size:22px;font-weight:900;margin-bottom:10px;}
+.footer-brand .fb-name span{color:var(--orange);}
+.footer-brand p{font-size:13px;color:var(--gray);line-height:1.7;}
+.footer-col h4{font-size:13px;font-weight:700;color:var(--orange);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;}
+.footer-col a{display:block;color:var(--gray);text-decoration:none;font-size:13px;margin-bottom:8px;transition:.2s;cursor:pointer;}
+.footer-col a:hover{color:#fff;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:18px;text-align:center;font-size:12px;color:var(--gray);}
+
+/* ===== BOTTOM NAV ===== */
+.bottom-nav{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;z-index:90;
+  background:#fff;border-top:1px solid var(--border);
+  height:var(--bot-h);
+  box-shadow:0 -4px 20px rgba(13,27,42,.08);
+}
+.bottom-nav-inner{display:flex;height:100%;}
+.bot-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;cursor:pointer;background:none;border:none;
+  color:var(--gray);font-family:'Cairo',sans-serif;font-size:10px;
+  transition:.2s;position:relative;
+}
+.bot-btn.active{color:var(--orange);}
+.bot-btn .bot-icon{display:flex;}
+.bot-badge{
+  position:absolute;top:6px;right:calc(50% - 22px);
+  background:var(--orange);color:#fff;border-radius:50%;
+  width:16px;height:16px;font-size:9px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cairo',sans-serif;
+}
+
+/* ===== MODAL ===== */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:200;
+  background:rgba(13,27,42,.55);backdrop-filter:blur(4px);
+  align-items:flex-end;justify-content:center;
+}
+.modal-overlay.open{display:flex;}
+.modal{
+  background:#fff;width:100%;max-width:520px;
+  border-radius:24px 24px 0 0;
+  max-height:92vh;overflow-y:auto;
+  animation:slideUp .3s cubic-bezier(.4,0,.2,1);
+  position:relative;padding:8px 0 env(safe-area-inset-bottom);
+}
+@media(min-width:600px){
+  .modal-overlay{align-items:center;}
+  .modal{border-radius:24px;max-width:500px;padding:0;}
+}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:12px auto;}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);}
+.modal-title{font-size:17px;font-weight:900;}
+.modal-close{background:none;border:none;cursor:pointer;color:var(--gray);display:flex;padding:4px;}
+.modal-body{padding:20px;}
+.price-calc-box{background:var(--gray-light);border-radius:var(--radius-sm);padding:16px;margin-bottom:16px;}
+.calc-label{font-size:13px;font-weight:700;margin-bottom:10px;display:block;}
+.calc-qty-row{display:flex;align-items:center;gap:10px;}
+.qty-ctrl-btn{
+  width:36px;height:36px;border-radius:10px;
+  background:#fff;border:2px solid var(--border);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:.2s;color:var(--primary);
+}
+.qty-ctrl-btn:hover{border-color:var(--orange);color:var(--orange);}
+.qty-display{font-size:18px;font-weight:900;min-width:40px;text-align:center;}
+.calc-result{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:12px;margin-top:12px;border-top:1px solid var(--border);
+}
+.calc-unit-price{font-size:13px;color:var(--gray);}
+.calc-total{font-size:22px;font-weight:900;color:var(--orange);}
+.notes-area{
+  width:100%;padding:11px 14px;
+  border:2px solid var(--border);border-radius:var(--radius-sm);
+  font-family:'Cairo',sans-serif;font-size:14px;
+  outline:none;transition:.2s;resize:none;
+  margin-bottom:14px;
+}
+.notes-area:focus{border-color:var(--orange);}
+
+/* ===== CART DRAWER ===== */
+.drawer-bg{display:none;position:fixed;inset:0;z-index:150;background:rgba(13,27,42,.4);}
+.drawer-bg.open{display:block;}
+.cart-drawer{
+  position:fixed;top:0;bottom:0;z-index:151;
+  width:min(380px,100vw);background:#fff;
+  box-shadow:-4px 0 40px rgba(13,27,42,.12);
+  transition:.3s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;
+}
+.cart-drawer{left:-400px;}
+.cart-drawer.open{left:0;}
+.drawer-head{
+  padding:18px 20px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.drawer-head h3{font-size:17px;font-weight:900;display:flex;align-items:center;gap:8px;}
+.drawer-close{background:none;border:none;cursor:pointer;color:var(--gray);display:flex;padding:4px;}
+.drawer-items{flex:1;overflow-y:auto;padding:14px;}
+.cart-item-row{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);}
+.cart-item-row:last-child{border-bottom:none;}
+.ci-thumb{
+  width:58px;height:58px;border-radius:12px;
+  background:var(--gray-light);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;color:var(--gray);
+}
+.ci-info{flex:1;min-width:0;}
+.ci-name{font-size:13px;font-weight:700;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ci-sub{font-size:11px;color:var(--gray);margin-bottom:6px;}
+.ci-note{font-size:10px;color:var(--gray);font-style:italic;}
+.ci-qty-row{display:flex;align-items:center;gap:8px;}
+.cq-btn{
+  width:26px;height:26px;border-radius:7px;background:var(--gray-light);
+  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--primary);transition:.2s;
+}
+.cq-btn:hover{background:var(--orange);color:#fff;}
+.cq-num{font-size:14px;font-weight:700;min-width:20px;text-align:center;}
+.ci-del{margin-right:auto;background:#fef2f2;color:#b91c1c;border:none;border-radius:7px;width:26px;height:26px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;}
+.ci-del:hover{background:#fee2e2;}
+.ci-price{font-size:15px;font-weight:900;color:var(--orange);flex-shrink:0;align-self:flex-start;margin-top:2px;}
+.drawer-footer{
+  padding:16px 20px;border-top:1px solid var(--border);
+  flex-shrink:0;background:#fff;
+}
+.df-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.df-total-label{font-size:15px;font-weight:700;}
+.df-total-val{font-size:22px;font-weight:900;color:var(--orange);}
+.cart-empty-state{text-align:center;padding:48px 20px;color:var(--gray);}
+.cart-empty-state svg{margin-bottom:12px;color:var(--border);}
+
+/* ===== TOAST ===== */
+.toast{
+  position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);
+  z-index:999;background:var(--primary);color:#fff;
+  padding:11px 22px;border-radius:50px;font-size:13px;font-weight:600;
+  box-shadow:0 8px 28px rgba(13,27,42,.25);
+  opacity:0;transition:.3s;pointer-events:none;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  .bottom-nav{display:block;}
+  body{padding-bottom:var(--bot-h);}
+  .cats-bar{display:none;}
+  footer{display:none;}
+  .logo-sub{display:none;}
+  .logo-name{font-size:17px;}
+  .nav-inner{gap:8px;padding:0 12px;}
+  .hero-section{padding:0 12px;}
+  .hero-card{padding:22px 18px;min-height:160px;}
+  .hero-h1{font-size:22px;}
+  .hero-p{display:none;}
+  .hero-art{display:none;}
+  .section{padding:0 12px;}
+  .cat-grid{grid-template-columns:repeat(3,1fr);gap:10px;}
+  .prod-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .promo-grid{grid-template-columns:1fr;}
+  .search-wrap{max-width:none;}
+}
+@media(max-width:380px){
+  .cat-grid{grid-template-columns:repeat(3,1fr);}
+  .prod-grid{grid-template-columns:repeat(2,1fr);}
+  .hero-h1{font-size:19px;}
+}
+</style>
+</head>
+<body>
+
+<!-- Firebase -->
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import{getFirestore,collection,getDocs,addDoc,query,orderBy,where,serverTimestamp,onSnapshot}
+  from"https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import{getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,onAuthStateChanged,signOut}
+  from"https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const firebaseConfig={
+  apiKey:"AIzaSyD6X2QqtAFsFLOsw1DCj00ERgR4mIzl4e4",
+  authDomain:"printova-store.firebaseapp.com",
+  projectId:"printova-store",
+  storageBucket:"printova-store.firebasestorage.app",
+  messagingSenderId:"44413773021",
+  appId:"1:44413773021:web:12d3877feb027f1a122734"
+};
+
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+const auth=getAuth(app);
+
+// ===== STATE =====
+let cart=JSON.parse(localStorage.getItem('pva_cart')||'[]');
+let currentUser=null;
+let allProducts=[];
+let currentProduct=null;
+let currentPage='home';
+
+// ===== LOAD PRODUCTS FROM FIRESTORE =====
+async function loadProducts(){
+  try{
+    const snap=await getDocs(collection(db,'products'));
+    allProducts=snap.docs.map(d=>({id:d.id,...d.data()}));
+    renderHome();
+    renderProductsPage(allProducts);
+  }catch(e){
+    console.error('loadProducts:',e);
+    renderHome();
+  }
+}
+
+// ===== AUTH =====
+onAuthStateChanged(auth,user=>{
+  currentUser=user;
+  updateAuthUI();
+  if(user&&currentPage==='account')renderAccountPage();
+  if(user&&currentPage==='login')showPage('account');
+  if(user&&currentPage==='register')showPage('account');
+});
+
+function updateAuthUI(){
+  const btn=document.getElementById('navLoginBtn');
+  if(currentUser){
+    btn.innerHTML=`<i data-lucide="user" style="width:16px;height:16px"></i> حسابي`;
+    btn.onclick=()=>showPage('account');
+  }else{
+    btn.innerHTML=`<i data-lucide="log-in" style="width:16px;height:16px"></i> دخول`;
+    btn.onclick=()=>showPage('login');
+  }
+  lucide.createIcons();
+}
+
+// ===== PAGES =====
+window.showPage=function(page){
+  currentPage=page;
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  const el=document.getElementById('page-'+page);
+  if(el)el.classList.add('active');
+  // bottom nav active
+  document.querySelectorAll('.bot-btn').forEach(b=>b.classList.remove('active'));
+  const bb=document.querySelector(`[data-page="${page}"]`);
+  if(bb)bb.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  // render on demand
+  if(page==='account')renderAccountPage();
+  if(page==='orders')renderOrdersPage();
+  if(page==='products')renderProductsPage(allProducts);
+};
+
+// ===== RENDER HOME =====
+function renderHome(){
+  // Cat grid
+  const cats=[
+    {label:'الطباعة والدعاية',sub:'فلايرات • أعلام',icon:'printer',cat:'الطباعة والدعاية والإعلان'},
+    {label:'الهدايا والتكريم',sub:'دروع • مجات',icon:'gift',cat:'الهدايا الدعائية والتكريم'},
+    {label:'المكاتب والشركات',sub:'اختام • أطقم',icon:'briefcase',cat:'مستلزمات المكاتب والشركات'},
+    {label:'الملابس',sub:'يونيفورم • شخصي',icon:'shirt',cat:'الملابس والمنتجات الشخصية'},
+    {label:'التغليف',sub:'بوكسات • تعبئة',icon:'package',cat:'التغليف والعرض'},
+    {label:'الخامات',sub:'سبلميشن • شيتات',icon:'layers',cat:'خامات الطباعة'},
+  ];
+  document.getElementById('homeCatGrid').innerHTML=cats.map(c=>`
+    <div class="cat-card" onclick="filterAndGo('${c.cat}')">
+      <div class="cat-icon-wrap"><i data-lucide="${c.icon}" style="width:26px;height:26px"></i></div>
+      <div class="cat-label">${c.label}</div>
+      <div class="cat-sub-label">${c.sub}</div>
+    </div>`).join('');
+  // Featured products (first 4)
+  renderProdGrid(allProducts.slice(0,8),'homeProdGrid');
+  lucide.createIcons();
+}
+
+window.filterAndGo=function(cat){
+  renderProductsPage(cat==='all'?allProducts:allProducts.filter(p=>p.category===cat));
+  // update filter chips
+  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+  const chip=document.querySelector(`[data-cat="${cat}"]`);
+  if(chip)chip.classList.add('active');
+  showPage('products');
+};
+
+// ===== RENDER PRODUCTS PAGE =====
+function renderProductsPage(list){
+  const grid=document.getElementById('allProdGrid');
+  if(!list||!list.length){
+    grid.innerHTML=`<div class="empty" style="grid-column:1/-1">
+      <i data-lucide="package-x" style="width:48px;height:48px"></i>
+      <p>لا توجد منتجات في هذا القسم</p>
+    </div>`;
+    lucide.createIcons();return;
+  }
+  renderProdGrid(list,'allProdGrid');
+}
+
+function renderProdGrid(list,containerId){
+  const el=document.getElementById(containerId);
+  if(!el)return;
+  el.innerHTML=list.map(p=>`
+    <div class="prod-card" onclick="openProductModal('${p.id}')">
+      <div class="prod-thumb">
+        <i data-lucide="image" style="width:40px;height:40px"></i>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">${p.name||'منتج'}</div>
+        <div class="prod-sub">${p.sub||p.category||''}</div>
+        <div class="prod-footer">
+          <div class="prod-price">${p.price||0} <small>جنيه/${p.unit||'قطعة'}</small></div>
+          <button class="btn-add-cart" onclick="event.stopPropagation();quickAdd('${p.id}')">
+            <i data-lucide="plus" style="width:16px;height:16px"></i>
+          </button>
+        </div>
+      </div>
+    </div>`).join('');
+  lucide.createIcons();
+}
+
+// ===== PRODUCT MODAL =====
+window.openProductModal=function(id){
+  currentProduct=allProducts.find(p=>p.id===id);
+  if(!currentProduct)return;
+  document.getElementById('pmName').textContent=currentProduct.name;
+  document.getElementById('pmCat').textContent=(currentProduct.category||'')+' — '+(currentProduct.sub||'');
+  document.getElementById('pmDesc').textContent=currentProduct.desc||'منتج طباعة احترافي بأعلى جودة.';
+  document.getElementById('pmUnitPrice').textContent=currentProduct.price||0;
+  document.getElementById('pmUnit').textContent=currentProduct.unit||'قطعة';
+  document.getElementById('pmQty').textContent=1;
+  document.getElementById('pmNotes').value='';
+  calcModalTotal();
+  document.getElementById('productModal').classList.add('open');
+};
+window.closeProductModal=function(){document.getElementById('productModal').classList.remove('open');};
+
+window.pmChangeQty=function(delta){
+  const el=document.getElementById('pmQty');
+  let v=parseInt(el.textContent)||1;
+  v=Math.max(1,v+delta);
+  el.textContent=v;
+  calcModalTotal();
+};
+function calcModalTotal(){
+  const qty=parseInt(document.getElementById('pmQty').textContent)||1;
+  const price=currentProduct?.price||0;
+  document.getElementById('pmTotal').textContent=(qty*price).toFixed(2)+' جنيه';
+}
+
+window.addToCartFromModal=function(){
+  const qty=parseInt(document.getElementById('pmQty').textContent)||1;
+  const notes=document.getElementById('pmNotes').value.trim();
+  if(!currentProduct)return;
+  const ex=cart.find(x=>x.id===currentProduct.id);
+  if(ex)ex.qty+=qty;
+  else cart.push({id:currentProduct.id,name:currentProduct.name,price:currentProduct.price,unit:currentProduct.unit||'قطعة',qty,notes});
+  saveCart();updateCartUI();
+  closeProductModal();
+  showToast('✓ تم إضافة المنتج للسلة');
+};
+
+window.quickAdd=function(id){
+  const p=allProducts.find(x=>x.id===id);
+  if(!p)return;
+  const ex=cart.find(x=>x.id===id);
+  if(ex)ex.qty++;
+  else cart.push({id:p.id,name:p.name,price:p.price,unit:p.unit||'قطعة',qty:1,notes:''});
+  saveCart();updateCartUI();showToast('✓ أُضيف للسلة');
+};
+
+// ===== CART =====
+function saveCart(){localStorage.setItem('pva_cart',JSON.stringify(cart));}
+function updateCartUI(){
+  const count=cart.reduce((s,x)=>s+x.qty,0);
+  document.querySelectorAll('.cart-count').forEach(el=>{el.textContent=count;el.style.display=count?'flex':'none';});
+  renderCartItems();
+}
+function renderCartItems(){
+  const el=document.getElementById('cartItemsList');
+  if(!el)return;
+  if(!cart.length){
+    el.innerHTML=`<div class="cart-empty-state">
+      <i data-lucide="shopping-cart" style="width:48px;height:48px"></i>
+      <p>السلة فارغة</p>
+    </div>`;lucide.createIcons();
+    document.getElementById('cartTotalVal').textContent='0 جنيه';
+    return;
+  }
+  el.innerHTML=cart.map(item=>`
+    <div class="cart-item-row">
+      <div class="ci-thumb"><i data-lucide="package" style="width:22px;height:22px"></i></div>
+      <div class="ci-info">
+        <div class="ci-name">${item.name}</div>
+        <div class="ci-sub">${item.price} جنيه/${item.unit}</div>
+        ${item.notes?`<div class="ci-note">📝 ${item.notes}</div>`:''}
+        <div class="ci-qty-row">
+          <button class="cq-btn" onclick="cartChangeQty('${item.id}',-1)"><i data-lucide="minus" style="width:12px;height:12px"></i></button>
+          <span class="cq-num">${item.qty}</span>
+          <button class="cq-btn" onclick="cartChangeQty('${item.id}',1)"><i data-lucide="plus" style="width:12px;height:12px"></i></button>
+          <button class="ci-del" onclick="cartRemove('${item.id}')"><i data-lucide="trash-2" style="width:12px;height:12px"></i></button>
+        </div>
+      </div>
+      <div class="ci-price">${(item.price*item.qty).toFixed(2)} ج</div>
+    </div>`).join('');
+  const total=cart.reduce((s,x)=>s+x.price*x.qty,0);
+  document.getElementById('cartTotalVal').textContent=total.toFixed(2)+' جنيه';
+  lucide.createIcons();
+}
+window.cartChangeQty=function(id,delta){const i=cart.find(x=>x.id===id);if(i){i.qty=Math.max(1,i.qty+delta);saveCart();updateCartUI();}};
+window.cartRemove=function(id){cart=cart.filter(x=>x.id!==id);saveCart();updateCartUI();};
+window.openCart=function(){document.getElementById('cartDrawer').classList.add('open');document.getElementById('drawerBg').classList.add('open');};
+window.closeCart=function(){document.getElementById('cartDrawer').classList.remove('open');document.getElementById('drawerBg').classList.remove('open');};
+
+// ===== CHECKOUT =====
+window.checkout=function(){
+  if(!currentUser){closeCart();showPage('login');showToast('⚠ سجّل دخولك أولاً');return;}
+  if(!cart.length){showToast('⚠ السلة فارغة');return;}
+  closeCart();
+  document.getElementById('checkoutModal').classList.add('open');
+};
+window.closeCheckout=function(){document.getElementById('checkoutModal').classList.remove('open');};
+window.submitOrder=async function(){
+  const name=document.getElementById('coName').value.trim();
+  const phone=document.getElementById('coPhone').value.trim();
+  const address=document.getElementById('coAddress').value.trim();
+  const notes=document.getElementById('coNotes').value.trim();
+  if(!name||!phone||!address){showToast('⚠ أكمل جميع الحقول المطلوبة');return;}
+  const total=cart.reduce((s,x)=>s+x.price*x.qty,0);
+  try{
+    const btn=document.getElementById('submitOrderBtn');
+    btn.disabled=true;btn.textContent='جاري الإرسال...';
+    await addDoc(collection(db,'orders'),{
+      userId:currentUser.uid,userEmail:currentUser.email,
+      customerName:name,phone,address,notes,
+      items:JSON.parse(JSON.stringify(cart)),total,
+      status:'pending',createdAt:serverTimestamp()
+    });
+    cart=[];saveCart();updateCartUI();
+    closeCheckout();
+    showToast('🎉 تم إرسال طلبك بنجاح!');
+    btn.disabled=false;btn.textContent='تأكيد الطلب';
+  }catch(e){showToast('❌ خطأ: '+e.message);}
+};
+
+// ===== AUTH =====
+window.doRegister=async function(){
+  const name=document.getElementById('regName').value.trim();
+  const email=document.getElementById('regEmail').value.trim();
+  const pass=document.getElementById('regPass').value;
+  const err=document.getElementById('regErr');
+  err.style.display='none';
+  if(!name||!email||!pass){err.textContent='أكمل جميع الحقول';err.style.display='block';return;}
+  try{
+    const btn=document.getElementById('regBtn');btn.disabled=true;btn.textContent='جاري الإنشاء...';
+    await createUserWithEmailAndPassword(auth,email,pass);
+    showPage('account');showToast('🎉 مرحباً بك في برينتوفا!');
+    btn.disabled=false;btn.textContent='إنشاء الحساب';
+  }catch(e){
+    err.textContent=e.code==='auth/email-already-in-use'?'البريد مستخدم بالفعل':'خطأ: '+e.message;
+    err.style.display='block';
+    document.getElementById('regBtn').disabled=false;
+    document.getElementById('regBtn').textContent='إنشاء الحساب';
+  }
+};
+window.doLogin=async function(){
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPass').value;
+  const err=document.getElementById('loginErr');
+  err.style.display='none';
+  try{
+    const btn=document.getElementById('loginBtn2');btn.disabled=true;btn.textContent='جاري الدخول...';
+    await signInWithEmailAndPassword(auth,email,pass);
+    showPage('account');showToast('✅ مرحباً بك!');
+    btn.disabled=false;btn.textContent='تسجيل الدخول';
+  }catch(e){
+    err.textContent='بريد أو كلمة مرور خاطئة';err.style.display='block';
+    document.getElementById('loginBtn2').disabled=false;
+    document.getElementById('loginBtn2').textContent='تسجيل الدخول';
+  }
+};
+window.doLogout=async function(){
+  await signOut(auth);showPage('home');showToast('👋 تم تسجيل الخروج');
+};
+
+// ===== ACCOUNT PAGE =====
+function renderAccountPage(){
+  const el=document.getElementById('accountContent');
+  if(!currentUser){
+    el.innerHTML=`<div class="empty" style="padding:40px 20px">
+      <i data-lucide="user-x" style="width:48px;height:48px"></i>
+      <p style="margin-bottom:16px">يجب تسجيل الدخول أولاً</p>
+      <button class="btn-full" onclick="showPage('login')" style="max-width:200px;margin:0 auto">تسجيل الدخول</button>
+    </div>`;
+    lucide.createIcons();return;
+  }
+  el.innerHTML=`
+    <div class="account-card">
+      <div class="account-header">
+        <div class="account-avatar"><i data-lucide="user" style="width:26px;height:26px"></i></div>
+        <div>
+          <div class="account-name">${currentUser.displayName||'عميل برينتوفا'}</div>
+          <div class="account-email">${currentUser.email}</div>
+        </div>
+      </div>
+      <div class="account-menu">
+        <button onclick="showPage('orders')">
+          <i data-lucide="package" style="width:18px;height:18px"></i>
+          طلباتي
+          <span class="icon-col"><i data-lucide="chevron-left" style="width:16px;height:16px"></i></span>
+        </button>
+        <button onclick="openCart()">
+          <i data-lucide="shopping-cart" style="width:18px;height:18px"></i>
+          سلة الشراء
+          <span class="icon-col"><i data-lucide="chevron-left" style="width:16px;height:16px"></i></span>
+        </button>
+        <button class="logout-btn" onclick="doLogout()">
+          <i data-lucide="log-out" style="width:18px;height:18px"></i>
+          تسجيل الخروج
+          <span class="icon-col"><i data-lucide="chevron-left" style="width:16px;height:16px"></i></span>
+        </button>
+      </div>
+    </div>`;
+  lucide.createIcons();
+}
+
+// ===== ORDERS PAGE =====
+async function renderOrdersPage(){
+  const el=document.getElementById('ordersContent');
+  if(!currentUser){el.innerHTML=`<div class="empty"><i data-lucide="lock" style="width:48px;height:48px"></i><p>سجّل دخولك لعرض طلباتك</p></div>`;lucide.createIcons();return;}
+  el.innerHTML=`<div class="empty"><i data-lucide="loader" style="width:36px;height:36px"></i><p>جاري التحميل...</p></div>`;lucide.createIcons();
+  try{
+    const q=query(collection(db,'orders'),where('userId','==',currentUser.uid),orderBy('createdAt','desc'));
+    const snap=await getDocs(q);
+    const orders=snap.docs.map(d=>({id:d.id,...d.data()}));
+    if(!orders.length){
+      el.innerHTML=`<div class="empty"><i data-lucide="inbox" style="width:48px;height:48px"></i><p>لا توجد طلبات بعد</p></div>`;
+      lucide.createIcons();return;
+    }
+    const statusMap={pending:'معلق',processing:'جاري التنفيذ',done:'مكتمل',cancelled:'ملغي'};
+    const statusClass={pending:'sb-pending',processing:'sb-processing',done:'sb-done',cancelled:'sb-cancelled'};
+    el.innerHTML=`<div class="orders-list">${orders.map(o=>`
+      <div class="order-item-card">
+        <div class="order-top">
+          <span class="order-id">طلب #${o.id.slice(-6).toUpperCase()}</span>
+          <span class="status-badge ${statusClass[o.status]||'sb-pending'}">${statusMap[o.status]||o.status}</span>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-bottom:8px">
+          ${o.createdAt?.toDate?.()?.toLocaleDateString('ar-EG',{day:'numeric',month:'long',year:'numeric'})||'—'}
+        </div>
+        <div style="font-size:13px;color:#555;margin-bottom:10px">
+          ${(o.items||[]).map(i=>`${i.name} × ${i.qty}`).join(' • ')}
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:13px;color:var(--gray)">${o.address||''}</span>
+          <span class="order-total">${(o.total||0).toFixed(2)} جنيه</span>
+        </div>
+      </div>`).join('')}</div>`;
+    lucide.createIcons();
+  }catch(e){el.innerHTML=`<div class="empty"><p>تعذّر تحميل الطلبات</p></div>`;}
+}
+
+// ===== SEARCH =====
+window.doSearch=function(){
+  const q=document.getElementById('searchInput').value.trim().toLowerCase();
+  if(!q){renderProductsPage(allProducts);showPage('products');return;}
+  const res=allProducts.filter(p=>(p.name||'').includes(q)||(p.category||'').includes(q)||(p.sub||'').includes(q));
+  renderProductsPage(res);
+  showPage('products');
+};
+
+// ===== TOAST =====
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+window.showToast=showToast;
+
+// ===== FILTER CHIPS =====
+window.filterProducts=function(cat,el){
+  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  const res=cat==='all'?allProducts:allProducts.filter(p=>p.category===cat);
+  renderProductsPage(res);
+};
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded',()=>{
+  lucide.createIcons();
+  loadProducts();
+  updateCartUI();
+  showPage('home');
+});
+</script>
+
+<!-- Topbar -->
+<div class="topbar">
+  🚀 شحن مجاني على الطلبات فوق <b>500 جنيه</b> &nbsp;|&nbsp; اتصل: <b>01282853079</b>
+</div>
+
+<!-- Navbar -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo-wrap" onclick="showPage('home')" style="cursor:pointer">
+      <div class="logo-icon">
+        <span class="logo-p">P</span>
+        <div class="logo-drop"></div>
+      </div>
+      <div class="logo-texts">
+        <div class="logo-name">PRINTO<span>VA</span></div>
+        <span class="logo-sub">Print. Your Vision. Our Passion.</span>
+      </div>
+    </a>
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="ابحث عن منتج..."
+        onkeyup="if(event.key==='Enter')doSearch()">
+      <button class="search-btn" onclick="doSearch()">
+        <i data-lucide="search" style="width:18px;height:18px"></i>
+      </button>
+    </div>
+    <div class="nav-actions">
+      <button class="icon-btn cart-btn" onclick="openCart()" title="السلة">
+        <i data-lucide="shopping-cart" style="width:22px;height:22px"></i>
+        <span class="badge cart-count" style="display:none">0</span>
+      </button>
+      <button class="btn-login" id="navLoginBtn">
+        <i data-lucide="log-in" style="width:16px;height:16px"></i> دخول
+      </button>
+    </div>
+  </div>
+</nav> 
+
+<!-- Cats Bar (desktop) -->
+<div class="cats-bar">
+  <div class="cats-inner">
+    <button class="cat-pill active" onclick="filterAndGo('all');showPage('products')">الكل</button>
+    <button class="cat-pill" onclick="filterAndGo('الطباعة والدعاية والإعلان')">
+      <i data-lucide="printer" style="width:14px;height:14px"></i> الطباعة والدعاية
+    </button>
+    <button class="cat-pill" onclick="filterAndGo('الهدايا الدعائية والتكريم')">
+      <i data-lucide="gift" style="width:14px;height:14px"></i> الهدايا والتكريم
+    </button>
+    <button class="cat-pill" onclick="filterAndGo('مستلزمات المكاتب والشركات')">
+      <i data-lucide="briefcase" style="width:14px;height:14px"></i> المكاتب
+    </button>
+    <button class="cat-pill" onclick="filterAndGo('الملابس والمنتجات الشخصية')">
+      <i data-lucide="shirt" style="width:14px;height:14px"></i> الملابس
+    </button>
+    <button class="cat-pill" onclick="filterAndGo('التغليف والعرض')">
+      <i data-lucide="package" style="width:14px;height:14px"></i> التغليف
+    </button>
+    <button class="cat-pill" onclick="filterAndGo('خامات الطباعة')">
+      <i data-lucide="layers" style="width:14px;height:14px"></i> الخامات
+    </button>
+  </div>
+</div>
+
+<!-- ========== PAGES ========== -->
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <!-- Hero -->
+  <div class="hero-section">
+    <div class="hero-card">
+      <div class="hero-content">
+        <div class="hero-pill">
+          <i data-lucide="zap" style="width:12px;height:12px"></i> متجر الطباعة الأول
+        </div>
+        <h1 class="hero-h1">اطبع <span>بصمتك</span><br>في كل مكان</h1>
+        <p class="hero-p">مجات • فلايرات • دروع • يونيفورم<br>بأعلى جودة وأسرع تسليم</p>
+        <button class="btn-hero" onclick="showPage('products')">
+          تسوّق الآن <i data-lucide="arrow-left" style="width:16px;height:16px"></i>
+        </button>
+      </div>
+      <div class="hero-art">🖨️</div>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="section">
+    <div class="sec-head">
+      <h2 class="sec-title">تسوق حسب القسم</h2>
+    </div>
+    <div class="cat-grid" id="homeCatGrid"></div>
+  </div>
+
+  <!-- Featured Products -->
+  <div class="section">
+    <div class="sec-head">
+      <h2 class="sec-title">منتجات مميزة</h2>
+      <button class="see-all" onclick="showPage('products')">
+        عرض الكل <i data-lucide="chevron-left" style="width:14px;height:14px"></i>
+      </button>
+    </div>
+    <div class="prod-grid" id="homeProdGrid">
+      <div class="empty" style="grid-column:1/-1">
+        <i data-lucide="loader" style="width:36px;height:36px"></i>
+        <p>جاري تحميل المنتجات...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Promo -->
+  <div class="section" style="margin-bottom:40px">
+    <div class="promo-grid">
+      <div class="promo-card p-dark">
+        <h3>طلبات الشركات</h3>
+        <p>أسعار خاصة للطلبات الكبيرة والجملة</p>
+        <button class="promo-btn" onclick="window.open('https://wa.me/201000000000')">تواصل معنا</button>
+        <div class="promo-art"><i data-lucide="building-2" style="width:60px;height:60px"></i></div>
+      </div>
+      <div class="promo-card p-orange">
+        <h3>اطبع تصميمك</h3>
+        <p>أرسل تصميمك مع ملاحظات الطلب</p>
+        <button class="promo-btn" onclick="showPage('products')">ابدأ الآن</button>
+        <div class="promo-art"><i data-lucide="pen-tool" style="width:60px;height:60px"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer (desktop) -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="fb-name">PRINTO<span>VA</span></div>
+          <p>متجر الطباعة والدعاية الأول — Print. Your Vision. Our Passion.</p>
+        </div>
+        <div class="footer-col">
+          <h4>الأقسام</h4>
+          <a onclick="filterAndGo('الطباعة والدعاية والإعلان')">الطباعة والدعاية</a>
+          <a onclick="filterAndGo('الهدايا الدعائية والتكريم')">الهدايا والتكريم</a>
+          <a onclick="filterAndGo('مستلزمات المكاتب والشركات')">المكاتب</a>
+          <a onclick="filterAndGo('الملابس والمنتجات الشخصية')">الملابس</a>
+        </div>
+        <div class="footer-col">
+          <h4>الحساب</h4>
+          <a onclick="showPage('login')">تسجيل الدخول</a>
+          <a onclick="showPage('register')">إنشاء حساب</a>
+          <a onclick="showPage('orders')">طلباتي</a>
+        </div>
+        <div class="footer-col">
+          <h4>تواصل معنا</h4>
+          <a href="tel:01000000000">📞 01000000000</a>
+          <a href="https://wa.me/201000000000" target="_blank">💬 واتساب</a>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2025 Printova — جميع الحقوق محفوظة</div>
+    </div>
+  </footer>
+</div>
+
+<!-- PRODUCTS PAGE -->
+<div class="page" id="page-products">
+  <div class="products-page-filters">
+    <button class="filter-chip active" data-cat="all" onclick="filterProducts('all',this)">الكل</button>
+    <button class="filter-chip" data-cat="الطباعة والدعاية والإعلان" onclick="filterProducts('الطباعة والدعاية والإعلان',this)">الطباعة والدعاية</button>
+    <button class="filter-chip" data-cat="الهدايا الدعائية والتكريم" onclick="filterProducts('الهدايا الدعائية والتكريم',this)">الهدايا والتكريم</button>
+    <button class="filter-chip" data-cat="مستلزمات المكاتب والشركات" onclick="filterProducts('مستلزمات المكاتب والشركات',this)">المكاتب</button>
+    <button class="filter-chip" data-cat="الملابس والمنتجات الشخصية" onclick="filterProducts('الملابس والمنتجات الشخصية',this)">الملابس</button>
+    <button class="filter-chip" data-cat="التغليف والعرض" onclick="filterProducts('التغليف والعرض',this)">التغليف</button>
+    <button class="filter-chip" data-cat="خامات الطباعة" onclick="filterProducts('خامات الطباعة',this)">الخامات</button>
+  </div>
+  <div class="section" style="padding-top:16px;margin-bottom:30px">
+    <div class="prod-grid" id="allProdGrid">
+      <div class="empty" style="grid-column:1/-1">
+        <i data-lucide="loader" style="width:36px;height:36px"></i>
+        <p>جاري التحميل...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ACCOUNT PAGE -->
+<div class="page" id="page-account">
+  <div class="account-page" id="accountContent"></div>
+</div>
+
+<!-- ORDERS PAGE -->
+<div class="page" id="page-orders">
+  <div style="display:flex;align-items:center;gap:8px;padding:16px 16px 0;max-width:480px;margin:0 auto">
+    <button onclick="showPage('account')" style="background:none;border:none;cursor:pointer;display:flex;color:var(--gray)">
+      <i data-lucide="arrow-right" style="width:20px;height:20px"></i>
+    </button>
+    <h2 style="font-size:17px;font-weight:900">طلباتي</h2>
+  </div>
+  <div id="ordersContent">
+    <div class="empty"><i data-lucide="loader" style="width:36px;height:36px"></i><p>جاري التحميل...</p></div>
+  </div>
+</div>
+
+<!-- LOGIN PAGE -->
+<div class="page" id="page-login">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="al-name">PRINTO<span>VA</span></div>
+        <div class="al-sub">Print. Your Vision. Our Passion.</div>
+      </div>
+      <h2 class="auth-title">مرحباً بك 👋</h2>
+      <p class="auth-sub">سجّل دخولك لمتابعة طلباتك</p>
+      <div class="auth-err" id="loginErr"></div>
+      <div class="form-group">
+        <label>البريد الإلكتروني</label>
+        <input type="email" id="loginEmail" placeholder="example@email.com" onkeyup="if(event.key==='Enter')doLogin()">
+      </div>
+      <div class="form-group">
+        <label>كلمة المرور</label>
+        <input type="password" id="loginPass" placeholder="••••••••" onkeyup="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="btn-full" id="loginBtn2" onclick="doLogin()">تسجيل الدخول</button>
+      <div class="auth-switch">مش عندك حساب؟ <a onclick="showPage('register')">أنشئ حساب جديد</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- REGISTER PAGE -->
+<div class="page" id="page-register">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="al-name">PRINTO<span>VA</span></div>
+        <div class="al-sub">Print. Your Vision. Our Passion.</div>
+      </div>
+      <h2 class="auth-title">إنشاء حساب 🚀</h2>
+      <p class="auth-sub">انضم وابدأ طلباتك</p>
+      <div class="auth-err" id="regErr"></div>
+      <div class="form-group"><label>الاسم</label><input type="text" id="regName" placeholder="اسمك الكامل"></div>
+      <div class="form-group"><label>البريد الإلكتروني</label><input type="email" id="regEmail" placeholder="example@email.com"></div>
+      <div class="form-group"><label>كلمة المرور</label><input type="password" id="regPass" placeholder="••••••••"></div>
+      <button class="btn-full" id="regBtn" onclick="doRegister()">إنشاء الحساب</button>
+      <div class="auth-switch">عندك حساب؟ <a onclick="showPage('login')">سجّل دخولك</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== OVERLAYS ========== -->
+
+<!-- Product Modal -->
+<div class="modal-overlay" id="productModal" onclick="if(event.target===this)closeProductModal()">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-head">
+      <h3 class="modal-title" id="pmName">اسم المنتج</h3>
+      <button class="modal-close" onclick="closeProductModal()">
+        <i data-lucide="x" style="width:20px;height:20px"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:12px;color:var(--orange);margin-bottom:4px" id="pmCat"></p>
+      <p style="font-size:13px;color:var(--gray);line-height:1.6;margin-bottom:16px" id="pmDesc"></p>
+      <div class="price-calc-box">
+        <span class="calc-label">💰 احسب السعر</span>
+        <div class="calc-qty-row">
+          <button class="qty-ctrl-btn" onclick="pmChangeQty(-1)">
+            <i data-lucide="minus" style="width:16px;height:16px"></i>
+          </button>
+          <div class="qty-display" id="pmQty">1</div>
+          <button class="qty-ctrl-btn" onclick="pmChangeQty(1)">
+            <i data-lucide="plus" style="width:16px;height:16px"></i>
+          </button>
+          <span style="font-size:13px;color:var(--gray);margin-right:auto" id="pmUnit">قطعة</span>
+        </div>
+        <div class="calc-result">
+          <span class="calc-unit-price">سعر الوحدة: <b id="pmUnitPrice">0</b> جنيه</span>
+          <span class="calc-total" id="pmTotal">0 جنيه</span>
+        </div>
+      </div>
+      <textarea class="notes-area" id="pmNotes" rows="2"
+        placeholder="ملاحظات التصميم — اكتب هنا أو أرسل تصميمك عبر واتساب بعد الطلب..."></textarea>
+      <button class="btn-full" onclick="addToCartFromModal()">
+        <i data-lucide="shopping-cart" style="width:16px;height:16px;vertical-align:middle"></i>
+        أضف للسلة
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal-overlay" id="checkoutModal" onclick="if(event.target===this)closeCheckout()">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-head">
+      <h3 class="modal-title">إتمام الطلب 📦</h3>
+      <button class="modal-close" onclick="closeCheckout()">
+        <i data-lucide="x" style="width:20px;height:20px"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group"><label>الاسم الكامل *</label><input type="text" id="coName" placeholder="اسمك الكامل"></div>
+      <div class="form-group"><label>رقم الهاتف *</label><input type="tel" id="coPhone" placeholder="01xxxxxxxxx"></div>
+      <div class="form-group"><label>العنوان *</label><input type="text" id="coAddress" placeholder="المنطقة، المدينة"></div>
+      <div class="form-group"><label>ملاحظات (اختياري)</label>
+        <textarea class="notes-area" id="coNotes" rows="2" placeholder="أي ملاحظات خاصة بطلبك..."></textarea>
+      </div>
+      <button class="btn-full" id="submitOrderBtn" onclick="submitOrder()">✅ تأكيد الطلب</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cart Drawer -->
+<div class="drawer-bg" id="drawerBg" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="drawer-head">
+    <h3><i data-lucide="shopping-cart" style="width:20px;height:20px"></i> سلة الشراء</h3>
+    <button class="drawer-close" onclick="closeCart()">
+      <i data-lucide="x" style="width:22px;height:22px"></i>
+    </button>
+  </div>
+  <div class="drawer-items" id="cartItemsList">
+    <div class="cart-empty-state">
+      <i data-lucide="shopping-cart" style="width:48px;height:48px"></i>
+      <p>السلة فارغة</p>
+    </div>
+  </div>
+  <div class="drawer-footer">
+    <div class="df-total">
+      <span class="df-total-label">الإجمالي:</span>
+      <span class="df-total-val" id="cartTotalVal">0 جنيه</span>
+    </div>
+    <button class="btn-full" onclick="checkout()">إتمام الطلب</button>
+  </div>
+</div>
+
+<!-- Bottom Nav (mobile) -->
+<div class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <button class="bot-btn active" data-page="home" onclick="showPage('home')">
+      <span class="bot-icon"><i data-lucide="home" style="width:22px;height:22px"></i></span>
+      الرئيسية
+    </button>
+    <button class="bot-btn" data-page="products" onclick="showPage('products')">
+      <span class="bot-icon"><i data-lucide="grid-3x3" style="width:22px;height:22px"></i></span>
+      المنتجات
+    </button>
+    <button class="bot-btn" data-page="cart" onclick="openCart()" style="position:relative">
+      <span class="bot-icon"><i data-lucide="shopping-cart" style="width:22px;height:22px"></i></span>
+      <span class="bot-badge cart-count" style="display:none">0</span>
+      السلة
+    </button>
+    <button class="bot-btn" data-page="orders" onclick="showPage('orders')">
+      <span class="bot-icon"><i data-lucide="package" style="width:22px;height:22px"></i></span>
+      طلباتي
+    </button>
+    <button class="bot-btn" data-page="account" onclick="showPage('account')">
+      <span class="bot-icon"><i data-lucide="user" style="width:22px;height:22px"></i></span>
+      حسابي
+    </button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+</body>
+</html>
